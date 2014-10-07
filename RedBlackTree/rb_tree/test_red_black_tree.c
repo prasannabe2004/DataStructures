@@ -45,10 +45,22 @@ int main()
     while(option!=8) 
     {
         printf("choose one of the following:\n");
-        printf("(1) add to tree\n(2) delete from tree\n(3) query\n");
-        printf("(4) find predecessor\n(5) find sucessor\n(6) enumerate\n");
-        printf("(7) print tree\n(8) quit\n");
-        do option=fgetc(stdin); while(-1 != option && isspace(option));
+        
+        printf("
+            (1) add to tree\n
+            (2) delete from tree\n
+            (3) query\n
+            (4) find predecessor\n
+            (5) find sucessor\n
+            (6) enumerate\n
+            (7) print tree\n
+            (8) quit\n
+            ");
+        
+        do 
+            option=fgetc(stdin); 
+        while(-1 != option && isspace(option));
+
         option-='0';
         switch(option)
         {
