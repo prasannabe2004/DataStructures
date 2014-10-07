@@ -46,16 +46,7 @@ int main()
     {
         printf("choose one of the following:\n");
         
-        printf("\
-            (1) add to tree\n \
-            (2) delete from tree\n \
-            (3) query\n \
-            (4) find predecessor\n \
-            (5) find sucessor\n \
-            (6) enumerate\n \
-            (7) print tree\n \
-            (8) quit\n \
-            ");
+        printf("\n (1) add to tree\n\n (2) delete from tree\n\n (3) query\n\n (4) find predecessor\n\n (5) find sucessor\n\n (6) enumerate\n\n (7) print tree\n\n (8) quit\n\n");
         
         do 
             option=fgetc(stdin); 
