@@ -1,7 +1,7 @@
 #include"red_black_tree.h"
 #include<stdio.h>
 #include<ctype.h>
-
+#include <string.h>
 
 /*  this file has functions to test a red-black tree of integers */
 
@@ -17,6 +17,21 @@ int IntComp(const void* a,const void* b)
     return(0);
 }
 
+int StrComp(const void* a,const void* b) 
+{
+    /* Compare the Domain name and return the value to RB Tree. */
+    if(strcasecmp((char *)a,(char *)b) > 0 ) 
+    {
+        return(1); /* String "a" is greater than string "b" */
+    }
+    else if(strcasecmp((char *)a,(char *)b) < 0)
+    {
+        return (-1); /* String "b" is greater than string "a" */
+    }
+    /* Both the strings are equal. */
+    return(0);
+}
+
 void IntPrint(const void* a) 
 {
     printf("%i",*(int*)a);
@@ -24,7 +39,9 @@ void IntPrint(const void* a)
 
 void InfoPrint(void* a) 
 {
-    ;
+    rb_red_blk_node* newNode = (rb_red_blk_node*)a;
+    if(newNode)
+        printf("%s->", (char *)newNode->key);
 }
 
 void InfoDest(void *a)
@@ -36,53 +53,54 @@ int main()
 {
     stk_stack* enumResult;
     int option=0;
-    int newKey,newKey2;
-    int* newInt;
+    char newKey[512];
+    char newKey2[512];
+    char* newInt;
     rb_red_blk_node* newNode;
     rb_red_blk_tree* tree;
 
-    tree=RBTreeCreate(IntComp,IntDest,InfoDest,IntPrint,InfoPrint);
+    tree=RBTreeCreate(StrComp,IntDest,InfoDest,IntPrint,InfoPrint);
     while(option!=8) 
     {
         printf("choose one of the following:\n");
         
-        printf("\n (1) add to tree\n\n (2) delete from tree\n\n (3) query\n\n (4) find predecessor\n\n (5) find sucessor\n\n (6) enumerate\n\n (7) print tree\n\n (8) quit\n\n");
+        printf("\n (a) add to tree\n\n (d) delete from tree\n\n (q) query\n\n (p) find predecessor\n\n (s) find sucessor\n\n (6) enumerate\n\n (x) print tree\n\n (e) quit\n\n");
         
         do 
             option=fgetc(stdin); 
         while(-1 != option && isspace(option));
-
-        option-='0';
+        /* option-='0'; */
         switch(option)
         {
-            case 1:
+            case 'a':
             {
                 printf("type key for new node\n");
-                scanf("%i",&newKey);
-                newInt=(int*) malloc(sizeof(int));
-                *newInt=newKey;
+                scanf("%s",newKey);
+                newInt=(char*) malloc(strlen(newKey)+1);
+                strcpy(newInt,newKey);
                 RBTreeInsert(tree,newInt,0);
             }
             break;
 
-            case 2:
+            case 'd':
             {
                 printf("type key of node to remove\n");
-                scanf("%i",&newKey);
-                if ( ( newNode=RBExactQuery(tree,&newKey ) ) ) 
+                scanf("%s",newKey);
+                if ( ( newNode=RBExactQuery(tree,newKey ) ) ) 
                     RBDelete(tree,newNode);/*assignment*/
                 else
                     printf("key not found in tree, no action taken\n");
             }
             break;
 
-            case 3:
+            case 'q':
             {
                 printf("type key of node to query for\n");
-                scanf("%i",&newKey);
-                if ( ( newNode = RBExactQuery(tree,&newKey) ) ) 
+                scanf("%s",newKey);
+                if ( ( newNode = RBExactQuery(tree,newKey) ) ) 
                 {/*assignment*/
                     printf("data found in tree at location %i\n",(int)newNode);
+                    printf("data found in tree is %s\n",(char*)newNode->key);
                 } 
                 else 
                 {
@@ -90,11 +108,11 @@ int main()
                 }
             }
             break;
-            case 4:
+            case 'p':
             {
                 printf("type key of node to find predecessor of\n");
-                scanf("%i",&newKey);
-                if ( ( newNode = RBExactQuery(tree,&newKey) ) ) 
+                scanf("%s",newKey);
+                if ( ( newNode = RBExactQuery(tree,newKey) ) ) 
                 {/*assignment*/
                     newNode=TreePredecessor(tree,newNode);
                     if(tree->nil == newNode) 
@@ -102,7 +120,7 @@ int main()
                         printf("there is no predecessor for that node (it is a minimum)\n");
                     } else 
                     {
-                        printf("predecessor has key %i\n",*(int*)newNode->key);
+                        printf("predecessor has key %s\n",(char*)newNode->key);
                     }
                 }
                 else
@@ -111,11 +129,11 @@ int main()
                 }
             }
             break;
-            case 5:
+            case 's':
             {
                 printf("type key of node to find successor of\n");
-                scanf("%i",&newKey);
-                if ( (newNode = RBExactQuery(tree,&newKey) ) ) 
+                scanf("%s",newKey);
+                if ( (newNode = RBExactQuery(tree,newKey) ) ) 
                 {
                     newNode=TreeSuccessor(tree,newNode);
                     if(tree->nil == newNode) 
@@ -124,7 +142,7 @@ int main()
                     }
                     else
                     {
-                        printf("successor has key %i\n",*(int*)newNode->key);
+                        printf("successor has key %s\n",(char*)newNode->key);
                     }
                 }
                 else
@@ -136,7 +154,7 @@ int main()
             case 6:
             {
                 printf("type low and high keys to see all keys between them\n");
-                scanf("%i %i",&newKey,&newKey2);
+                scanf("%s %s",newKey,newKey2);
                 enumResult=RBEnumerate(tree,&newKey,&newKey2);	  
                 while ( (newNode = StackPop(enumResult)) ) 
                 {
@@ -146,12 +164,12 @@ int main()
                 free(enumResult);
             }
             break;
-            case 7:
+            case 'x':
             {
                 RBTreePrint(tree);
             }
             break;
-            case 8:
+            case 'e':
             {
                 RBTreeDestroy(tree);
                 return 0;
