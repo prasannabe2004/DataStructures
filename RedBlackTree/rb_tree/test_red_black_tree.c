@@ -46,15 +46,15 @@ int main()
     {
         printf("choose one of the following:\n");
         
-        printf("
-            (1) add to tree\n
-            (2) delete from tree\n
-            (3) query\n
-            (4) find predecessor\n
-            (5) find sucessor\n
-            (6) enumerate\n
-            (7) print tree\n
-            (8) quit\n
+        printf("\
+            (1) add to tree\n \
+            (2) delete from tree\n \
+            (3) query\n \
+            (4) find predecessor\n \
+            (5) find sucessor\n \
+            (6) enumerate\n \
+            (7) print tree\n \
+            (8) quit\n \
             ");
         
         do 
