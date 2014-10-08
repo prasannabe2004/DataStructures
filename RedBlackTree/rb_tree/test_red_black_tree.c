@@ -34,7 +34,7 @@ int StrComp(const void* a,const void* b)
 
 void IntPrint(const void* a) 
 {
-    printf("%i",*(int*)a);
+    printf("%s",(char*)a);
 }
 
 void InfoPrint(void* a) 
