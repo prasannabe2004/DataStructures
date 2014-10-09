@@ -5,9 +5,11 @@
 
 /*  this file has functions to test a red-black tree of integers */
 
-void IntDest(void* a) 
+void StringDestroy(void* a) 
 {
-    free((int*)a);
+    char* key = (char*)a;
+    if(key)
+        free(key);
 }
 
 int IntComp(const void* a,const void* b) 
@@ -32,7 +34,7 @@ int StrComp(const void* a,const void* b)
     return(0);
 }
 
-void IntPrint(const void* a) 
+void StringPrint(const void* a) 
 {
     printf("%s",(char*)a);
 }
@@ -59,7 +61,7 @@ int main()
     rb_red_blk_node* newNode;
     rb_red_blk_tree* tree;
 
-    tree=RBTreeCreate(StrComp,IntDest,InfoDest,IntPrint,InfoPrint);
+    tree=RBTreeCreate(StrComp,StringDestroy,InfoDest,StringPrint,InfoPrint);
     while(option!=8) 
     {
         printf("choose one of the following:\n");
@@ -99,7 +101,7 @@ int main()
                 scanf("%s",newKey);
                 if ( ( newNode = RBExactQuery(tree,newKey) ) ) 
                 {/*assignment*/
-                    printf("data found in tree at location %i\n",(int)newNode);
+                    /* printf("data found in tree at location %i\n",(int)newNode); */
                     printf("data found in tree is %s\n",(char*)newNode->key);
                 } 
                 else 
