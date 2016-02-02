@@ -3,21 +3,21 @@
 #include<stdbool.h>
 #include <time.h>
 
-struct test_struct
+struct node
 {
     int val;
-    struct test_struct *next;
+    struct node *next;
 };
 
-struct test_struct *head = NULL;
-struct test_struct *curr = NULL;
+static struct node *head = NULL;
+static struct node *curr = NULL;
 
-struct timeval  tv1, tv2;
+static struct timeval  tv1, tv2;
 
-struct test_struct* create_list(int val)
+struct node* create_list(int val)
 {
     printf("Creating list with headnode as [%d]\n",val);
-    struct test_struct *ptr = (struct test_struct*)malloc(sizeof(struct test_struct));
+    struct node *ptr = (struct node*)malloc(sizeof(struct node));
     if(NULL == ptr)
     {
         printf("Node creation failed \n");
@@ -30,14 +30,14 @@ struct test_struct* create_list(int val)
     return ptr;
 }
 
-struct test_struct* add_to_list(int val)
+struct node* add_to_list(int val)
 {
     if(NULL == head)
     {
         return (create_list(val));
     }
 
-    struct test_struct *ptr = (struct test_struct*)malloc(sizeof(struct test_struct));
+    struct node *ptr = (struct node*)malloc(sizeof(struct node));
     if(NULL == ptr)
     {
         printf("Node creation failed \n");
@@ -52,10 +52,10 @@ struct test_struct* add_to_list(int val)
     return ptr;
 }
 
-struct test_struct* search_in_list(int val, struct test_struct **prev)
+struct node* search_in_list(int val, struct node **prev)
 {
-    struct test_struct *ptr = head;
-    struct test_struct *tmp = NULL;
+    struct node *ptr = head;
+    struct node *tmp = NULL;
     bool found = false;
 
     printf("Searching the list for value [%d] \n",val);
@@ -92,8 +92,8 @@ struct test_struct* search_in_list(int val, struct test_struct **prev)
 
 int delete_from_list(int val)
 {
-    struct test_struct *prev = NULL;
-    struct test_struct *del = NULL;
+    struct node *prev = NULL;
+    struct node *del = NULL;
 
     printf("Deleting value [%d] from list\n",val);
 
@@ -125,7 +125,7 @@ int delete_from_list(int val)
 
 void print_list(void)
 {
-    struct test_struct *ptr = head;
+    struct node *ptr = head;
 
     printf("-------Printing list Start-------\n");
     while(ptr != NULL)
@@ -138,10 +138,26 @@ void print_list(void)
     return;
 }
 
+void reverseList()
+{
+    struct node* curr = head;
+    struct node* prev = NULL;
+    struct node* next = NULL;
+
+    while(curr !=NULL)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head = prev;
+}
+
 int main(void)
 {
     int i = 0, ret = 0;
-    struct test_struct *ptr = NULL;
+    struct node *ptr = NULL;
 
     print_list();
 
@@ -159,6 +175,10 @@ int main(void)
     {
         printf("Search passed [val = %d]\n",ptr->val);
     }
+
+    printf("Lets reverse the linked list\n");
+
+    reverseList();
 
     return 0;
 }
