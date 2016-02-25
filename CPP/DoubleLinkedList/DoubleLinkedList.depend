@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1453310049 source:c:\users\pmohanasundaram\documents\github\cpp\mystuffs\doublelinkedlist\list.cpp
+	"list.h"
+
+1453310649 c:\users\pmohanasundaram\documents\github\cpp\mystuffs\doublelinkedlist\list.h
+	<iostream>
+	<string>
+
+1453320132 source:c:\users\pmohanasundaram\documents\github\cpp\mystuffs\doublelinkedlist\main.cpp
+	<iostream>
+	<sstream>
+	"list.h"
+

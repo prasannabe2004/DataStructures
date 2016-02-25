@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1453263583 source:c:\users\pmohanasundaram\documents\github\cpp\mystuffs\linkedlist\list.cpp
+	"list.h"
+
+1453264316 c:\users\pmohanasundaram\documents\github\cpp\mystuffs\linkedlist\list.h
+	<string>
+	<iostream>
+
+1453268497 source:c:\users\pmohanasundaram\documents\github\cpp\mystuffs\linkedlist\main.cpp
+	<iostream>
+	<sstream>
+	"list.h"
+
