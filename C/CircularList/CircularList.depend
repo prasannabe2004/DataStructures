@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1455078677 source:/home/prasanna/github/C/mystuffs/CircularList/main.c
+	"list.h"
+
+1455078794 /home/prasanna/github/C/mystuffs/CircularList/list.h
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<unistd.h>
+	<errno.h>
+	<string.h>
+	<syslog.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<limits.h>
+	<fcntl.h>
+	<sys/time.h>
+	<sys/wait.h>
+	<signal.h>
+
